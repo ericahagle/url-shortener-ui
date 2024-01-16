@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { getUrls } from '../../apiCalls';
+import { getUrls, postUrl } from '../../apiCalls';
 import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
-function App () {
+function App() {
   const [urls, setUrls] = useState([]);
   const [error, setError] = useState('');
+
+  const addUrl = (newUrl) => {
+    postUrl(newUrl)
+      .then(data => {
+        setUrls([...urls, data]);
+      })
+      // .then(() => {
+      //   getUrls()
+      // })
+      .catch(error => setError(error.message));
+  }
 
   useEffect(() => {
     getUrls()
@@ -20,10 +31,11 @@ function App () {
     <main className="App">
       <header>
         <h1>URL Shortener</h1>
-        <UrlForm />
+        <UrlForm addUrl={addUrl} />
       </header>
 
-      <UrlContainer urls={urls}/>
+      <UrlContainer urls={urls} />
+      {error && <p className='error-message'>{error}</p>}
     </main>
   );
 }
