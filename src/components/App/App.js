@@ -13,9 +13,6 @@ function App() {
       .then(data => {
         setUrls([...urls, data]);
       })
-      // .then(() => {
-      //   getUrls()
-      // })
       .catch(error => setError(error.message));
   }
 
