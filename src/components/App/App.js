@@ -18,7 +18,7 @@ function App () {
         <UrlForm />
       </header>
 
-      <UrlContainer urls={"<<<Urls should go here>>>"}/>
+      <UrlContainer urls={urls}/>
     </main>
   );
 }
