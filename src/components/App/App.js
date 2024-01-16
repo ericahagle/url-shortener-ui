@@ -6,10 +6,15 @@ import UrlForm from '../UrlForm/UrlForm';
 
 function App () {
   const [urls, setUrls] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-
-  })
+    getUrls()
+      .then(data => {
+        setUrls([...urls, ...data.urls]);
+      })
+      .catch((error) => setError(error.message));
+  }, []);
 
   return (
     <main className="App">
